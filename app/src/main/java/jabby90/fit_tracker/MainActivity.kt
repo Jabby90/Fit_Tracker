@@ -2,7 +2,6 @@ package jabby90.fit_tracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import jabby90.fit_tracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,14 +15,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Example of a call to a native method
-        binding.sampleText.text = stringFromJNI()
+
+        val dirPath = filesDir.absolutePath;
+        var foodStorageName = "j_tst.txt";
+        binding.sampleText.text = stringFromJNI(dirPath, foodStorageName)
     }
 
     /**
      * A native method that is implemented by the 'fit_tracker' native library,
      * which is packaged with this application.
      */
-    external fun stringFromJNI(): String
+    external fun stringFromJNI(dirPath: String, foodStorageName: String): String
 
     companion object {
         // Used to load the 'fit_tracker' library on application startup.
